@@ -36,7 +36,10 @@ class SignUpViewController: UIViewController {
                     }
                     print("\(user!.user.email!) created")
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
+                    vc?.modalPresentationStyle = .fullScreen
+                    // 加了一段讓它 present 時是全畫面
                     self.present(vc!, animated: true, completion: nil )
+                    
                 }
             }else{
                 print("Password didn't match")
@@ -49,4 +52,4 @@ class SignUpViewController: UIViewController {
    
 
 }
-//test
+

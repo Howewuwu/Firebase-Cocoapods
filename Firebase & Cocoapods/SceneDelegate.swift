@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        
+        if Auth.auth().currentUser != nil { print("User login")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC")
+            self.window?.rootViewController = tabVC
+         // 課程教的是要擺在 AppDelegate 裡，但因為 Swift 之後把 window 相關的功能移到 SceneDelegate 裡，所以我就把這串“維持登入功能“的 code 放在這，只是意外的可以運行，目前也還不知道為什麼可以 😀
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

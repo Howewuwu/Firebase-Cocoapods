@@ -73,6 +73,15 @@ class ViewController: UIViewController {
     @IBAction func loginPressed(_ sender: Any) {
         Analytics.logEvent("loginEvent", parameters: nil)
         
+        if let email = emailField.text, let password = passwordField.text {
+            Auth.auth().signIn(withEmail: email, password: password) { user, error in
+                if let error = error { print(error.localizedDescription)
+                    return }
+            }
+            self.performSegue(withIdentifier: "login", sender: nil)
+            
+            }
+        
     }
     
     

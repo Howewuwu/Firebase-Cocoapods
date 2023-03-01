@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C16272429AE469100CFA266 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C16272329AE469100CFA266 /* SignUpViewController.swift */; };
+		9C16272629AF9F4C00CFA266 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C16272529AF9F4C00CFA266 /* FeedViewController.swift */; };
+		9C16272829AF9FBD00CFA266 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C16272729AF9FBD00CFA266 /* UploadViewController.swift */; };
 		9C8382C3299BAA8F00A05465 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9C8382C2299BAA8F00A05465 /* FirebaseAnalytics */; };
 		9C8382C5299BAA9000A05465 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C8382C4299BAA9000A05465 /* FirebaseAnalyticsSwift */; };
 		9C8382C7299BAA9000A05465 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9C8382C6299BAA9000A05465 /* FirebaseAuth */; };
@@ -24,10 +27,12 @@
 		9CCE7D1E299A922500890C0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CCE7D1C299A922500890C0B /* LaunchScreen.storyboard */; };
 		9CCE7D26299A96A500890C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CCE7D25299A96A400890C0B /* GoogleService-Info.plist */; };
 		9CDDFD0229A7DD3500209A81 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDDFD0129A7DD3500209A81 /* FirebaseFirestore */; };
-		9CE9B85B299D21F600F6681F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE9B85A299D21F600F6681F /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C16272329AE469100CFA266 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9C16272529AF9F4C00CFA266 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		9C16272729AF9FBD00CFA266 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		9C92D4B9299E0F9300E375DD /* RemoteConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfig.plist; sourceTree = "<group>"; };
 		9CCE7D0E299A922400890C0B /* Firebase & Cocoapods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Firebase & Cocoapods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCE7D11299A922400890C0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +43,6 @@
 		9CCE7D1D299A922500890C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CCE7D1F299A922500890C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CCE7D25299A96A400890C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9CE9B85A299D21F600F6681F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +85,12 @@
 		9CCE7D10299A922400890C0B /* Firebase & Cocoapods */ = {
 			isa = PBXGroup;
 			children = (
+				9CCE7D15299A922400890C0B /* ViewController.swift */,
+				9C16272329AE469100CFA266 /* SignUpViewController.swift */,
+				9C16272529AF9F4C00CFA266 /* FeedViewController.swift */,
+				9C16272729AF9FBD00CFA266 /* UploadViewController.swift */,
 				9CCE7D11299A922400890C0B /* AppDelegate.swift */,
 				9CCE7D13299A922400890C0B /* SceneDelegate.swift */,
-				9CE9B85A299D21F600F6681F /* SignUpViewController.swift */,
-				9CCE7D15299A922400890C0B /* ViewController.swift */,
 				9CCE7D17299A922400890C0B /* Main.storyboard */,
 				9CCE7D1A299A922500890C0B /* Assets.xcassets */,
 				9CCE7D1C299A922500890C0B /* LaunchScreen.storyboard */,
@@ -190,8 +196,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CCE7D16299A922400890C0B /* ViewController.swift in Sources */,
+				9C16272829AF9FBD00CFA266 /* UploadViewController.swift in Sources */,
 				9CCE7D12299A922400890C0B /* AppDelegate.swift in Sources */,
-				9CE9B85B299D21F600F6681F /* SignUpViewController.swift in Sources */,
+				9C16272629AF9F4C00CFA266 /* FeedViewController.swift in Sources */,
+				9C16272429AE469100CFA266 /* SignUpViewController.swift in Sources */,
 				9CCE7D14299A922400890C0B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
