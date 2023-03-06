@@ -7,6 +7,7 @@
 // 要使用相機或相簿時要使用者的同意，需在 info plist 新增兩條 Row 為 “Privacy - Camera Usage Description” ＆ “Privacy - Photo Library Usage Description”，並在旁邊簡單描述用途。
 
 import UIKit
+import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 
@@ -40,18 +41,28 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UploadViewController.imagePressed))
-        view.addGestureRecognizer(tapGesture)
-    // 增加手勢功能，（target：是指誰去做這件事,action：是指做什麼）
-    // action 後面是用一個方式告訴它選某一個 method（另外寫）去做這件事
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGesture)
+        // 增加手勢功能，（target：是指誰去做這件事,action：是指做什麼）
+        // action 後面是用一個方式告訴它選某一個 method（另外寫）去做這件事，“#” 這個符號第一次看到
+       
+ 
     
         
         
         
+    } //這裡是 viewDidLoad 結尾
+    
+    
+    // 前面需加 "@objc" 對應這個 “action: #selector(UploadViewController.imagePressed)”
+    @objc func imagePressed() {
         
-        
-        
-        
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true)
     }
+    // 這個 func 執行完後依然會去執行 func imagePickerController 這串功能，因為它仍然還是一個 “picker”（let picker = UIImagePickerController()）的動作
+    
+    
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -59,34 +70,27 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         imageView.image = image
         picker.dismiss(animated: true)
     }
-    
+    // UIImagePickerControllerDelegate 裡面已經事先定義好 picker 做完之後可以做的事情，上面這串就是其中一個，：“當它去選擇了某個 media 之後，我們會去使用它”。
+    // 一個物件的 delegate，比如說 “UIImagePickerControllerDelegate”，它裡面會去做 delegate 的 method 前面都會叫 “ImagePickerController”，後面再用不同的參數型態代表它做不同的事。
 
-    
-    @objc func imagePressed(){
-        
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true)
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            imageView.image = image
-            picker.dismiss(animated: true)
-        }
-        
-    }
-    
-    
-    
     
 
     @IBAction func share(_ sender: Any) {
+        statusLabel.text = "開始上傳"
+        if let image = imageView.image {
+            guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+        }
     }
-    
-    
+    // if let 與 guard let 的差別
+    // 將 guard let 放入 if let 運用 if let 就可以不用是 if let XXX = XXX {.....} else {.....} 而是在 if let XXX = XXX {.....} 時就結束了？
     
     @IBAction func takePic(_ sender: Any) {
+        picker.sourceType = .camera
+        present(picker, animated: true)
     }
-    
+    // 上面這串是能夠讓手機相機拍完照之後取用的功能
+    // 照完照選完照片之後一樣會去跑 func imagePickerController 這串功能
+    // 疑問：" present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>) "，present 第一個參數要的型態是 UIViewController，可是 picker 能算是嗎？
     
     
 
