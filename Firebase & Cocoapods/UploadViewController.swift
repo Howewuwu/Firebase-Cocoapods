@@ -12,6 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 
+
 class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
@@ -100,8 +101,36 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     return
                 }
                 self.statusLabel.text = "上傳成功"
+                // 上傳 + （上傳成功 or 上傳失敗）的處理
+                
+                //let imageUrl = metadata?.downloadURL()?.absoluteString
+                //let imageUrl: String? = metadata?.downloadURL()?.absoluteString
+                
+                storageRef.downloadURL { url, error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                    if let imageUrl = url?.absoluteString{
+                        print(imageUrl)
+                        
+                        let post = ["image" : imageUrl, "postedBy" : Auth.auth().currentUser?.email!, "postText" : self.textView.text!] as [String? : Any]
+                        
+                        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("posts").childByAutoId().setValue(post)
+                        
+                      
+                        
+                    }
+                }
+                
+                
+                    
+                
+                
+                
+                
+                
             }
-            // 上傳 + （上傳成功 or 上傳失敗）的處理
+            
             
         }
     }

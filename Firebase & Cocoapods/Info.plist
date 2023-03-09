@@ -6,6 +6,8 @@
 	<string>Take and Upload photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Upload</string>
+	<key>FirebaseDatabaseURL</key>
+	<string>https://ch6-firebasecocoapods-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

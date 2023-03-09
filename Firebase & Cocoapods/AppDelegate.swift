@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseRemoteConfig
 import FirebaseFirestore
+import FirebaseDatabase
 
 
 
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        
+       
+      
         
         return true
     }
