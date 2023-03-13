@@ -85,6 +85,12 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         if let image = imageView.image {
             guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
             
+            // if let 與 guard let 的差別
+            // if let 用於判斷一個可選值是否為 nil，並在不為 nil 的情況下進行後續處理；guard let 用於判斷一個可選值是否為 nil，如果是 nil 就提前退出當前作用域
+            // 將 guard let 放入 if let 運用 if let 就可以不用是 if let XXX = XXX {.....} else {.....} 而是在 if let XXX = XXX {.....} 時就結束了？
+            // UIImageJPEGRepresentation(UIImage, compressionQuality: ) 已更新成 ➜ UIImage.jpegData(compressionQuality: )
+            
+            
             let imagePath = Auth.auth().currentUser!.uid + "/media/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
             // 設定檔案目錄的路徑，斜線 “ / ” 這個符號是增加目的地的意思（整個用 String 包住），再利用時間來標注照片的檔名（Date.timeIntervalSinceReferenceDate 本身會有小數點所以用 Int 包住），檔案的結尾是 .jpg
             let metadata = StorageMetadata()
@@ -113,20 +119,19 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     if let imageUrl = url?.absoluteString{
                         print(imageUrl)
                         
-                        let post = ["image" : imageUrl, "postedBy" : Auth.auth().currentUser?.email!, "postText" : self.textView.text!] as [String? : Any]
+                        let post = (["image" : imageUrl, "postedBy" : Auth.auth().currentUser?.email! as Any, "postText" : self.textView.text!] as [String? : Any])
                         
-                        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("posts").childByAutoId().setValue(post)
+                        Database.database(url: "https://ch6-firebasecocoapods-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child("users").child(Auth.auth().currentUser!.uid).child("posts").childByAutoId().setValue(post)
                         
-                      
+                        // 上面這一串是將檔案丟到 Firebase 的 Realtime Database
+    // 原本的 let imageUrl = metadata?.downloadURL()?.absoluteString 已經無法使用換成 storageRef.downloadURL { <#URL?#>, <#Error?#> in <#code#> }
+    // 另外遇到的問題是 Reason: Database lives in a different region. Please change your database URL
+    // 解決方法是在 Database.database(“這裡面”) 加上 url: "https://ch6-firebasecocoapods-default-rtdb.asia-southeast1.firebasedatabase.app"
+    // 原因可能是因為我不是預設的 US-central 所以一直不成功，需要給它另一個指引，（上網查的加上大致理解只能說可能是這樣 ＸＤ）
+    // 解決網誌 : https://stackoverflow.com/questions/65218388/firebase-realtime-on-ios-cannot-access-realtime-database (感覺不是在講同件事，但誤打誤撞解決？)
                         
                     }
                 }
-                
-                
-                    
-                
-                
-                
                 
                 
             }
@@ -134,10 +139,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
             
         }
     }
-    // if let 與 guard let 的差別
-    // if let 用於判斷一個可選值是否為 nil，並在不為 nil 的情況下進行後續處理；guard let 用於判斷一個可選值是否為 nil，如果是 nil 就提前退出當前作用域
-    // 將 guard let 放入 if let 運用 if let 就可以不用是 if let XXX = XXX {.....} else {.....} 而是在 if let XXX = XXX {.....} 時就結束了？
-    // UIImageJPEGRepresentation(UIImage, compressionQuality: ) 已更新成 ➜ UIImage.jpegData(compressionQuality: )
     
     
     @IBAction func takePic(_ sender: Any) {
