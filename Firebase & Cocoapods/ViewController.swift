@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
+    // 手機上點需要打字的地方時會跳出鍵盤，隨意點一下其它地方鍵盤則會消失
 
 }
 

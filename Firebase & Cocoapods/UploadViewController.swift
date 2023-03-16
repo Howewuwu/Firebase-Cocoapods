@@ -24,6 +24,10 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     // UIImagePickerController 在使用時必須要有 delegate 才能去對應做選項
     
     var storage = Storage.storage()
+    // 可以放 Storage 的 Object
+    // 讓整個程式都用到同一個 storage
+    // 幫忙做 upload 的動作
+    // 其實不太懂ㄏㄏ
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +88,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         statusLabel.text = "開始上傳"
         if let image = imageView.image {
             guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
-            
             // if let 與 guard let 的差別
             // if let 用於判斷一個可選值是否為 nil，並在不為 nil 的情況下進行後續處理；guard let 用於判斷一個可選值是否為 nil，如果是 nil 就提前退出當前作用域
             // 將 guard let 放入 if let 運用 if let 就可以不用是 if let XXX = XXX {.....} else {.....} 而是在 if let XXX = XXX {.....} 時就結束了？
@@ -93,12 +96,15 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             let imagePath = Auth.auth().currentUser!.uid + "/media/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
             // 設定檔案目錄的路徑，斜線 “ / ” 這個符號是增加目的地的意思（整個用 String 包住），再利用時間來標注照片的檔名（Date.timeIntervalSinceReferenceDate 本身會有小數點所以用 Int 包住），檔案的結尾是 .jpg
+            // + 跟 用 String 包起來似乎是原本就必須這樣做？(使用者的 uid 底下再加路徑)
+            
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             // 告知上傳檔案的格式與描述 （不是很懂）
             
             let storageRef = self.storage.reference(withPath: imagePath)
             // 告知路徑
+            // 路徑產生的 reference
             
             storageRef.putData(imageData, metadata: metadata) { metadata, error in
                 if let error = error {
